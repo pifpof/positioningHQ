@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Company Research — PositioningHQ</title>
+    <meta name="description"
+        content="9-step structured company research skill for Claude Code — produces a full market intelligence document stored in /memory." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet" />
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg: #080c14;
+            --surface: #0e1420;
+            --surface2: #131a27;
+            --border: rgba(255, 255, 255, 0.07);
+            --text: #e8edf5;
+            --text-muted: #7a8499;
+            --text-dim: #4a5568;
+            --accent: #38bdf8;
+            --accent2: #7dd3fc;
+            --radius: 16px;
+            --radius-sm: 10px;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            background: rgba(8, 12, 20, 0.7);
+        }
+
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 24px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .nav-logo {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .nav-back {
+            font-size: 14px;
+            color: var(--text-muted);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: color 0.2s;
+        }
+
+        .nav-back:hover {
+            color: var(--text);
+        }
+
+        .hero {
+            padding: 130px 0 64px;
+        }
+
+        .skill-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .skill-badge {
+            background: rgba(56, 189, 248, 0.12);
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            color: var(--accent2);
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 100px;
+        }
+
+        h1 {
+            font-size: clamp(32px, 5vw, 52px);
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            margin-bottom: 20px;
+            line-height: 1.15;
+        }
+
+        .accent {
+            color: var(--accent);
+        }
+
+        .hero-sub {
+            font-size: 18px;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-bottom: 36px;
+            line-height: 1.7;
+        }
+
+        .command-block {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 14px 20px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 15px;
+            margin-bottom: 48px;
+        }
+
+        .cmd-prefix {
+            color: var(--accent2);
+        }
+
+        .section {
+            padding: 48px 0;
+            border-top: 1px solid var(--border);
+        }
+
+        h2 {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 20px;
+        }
+
+        .steps-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 16px 20px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+        }
+
+        .step-num {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: rgba(56, 189, 248, 0.15);
+            color: var(--accent2);
+            font-size: 13px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .step-content h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .step-content p {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.55;
+        }
+
+        .output-box {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 24px;
+        }
+
+        .output-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 14px;
+        }
+
+        .output-row:last-child {
+            border-bottom: none;
+        }
+
+        .output-label {
+            color: var(--text-muted);
+        }
+
+        .output-val {
+            color: var(--text);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+        }
+
+        .cta-bar {
+            padding: 48px 0 80px;
+            text-align: center;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent), #0ea5e9);
+            color: #000;
+            font-weight: 700;
+            font-size: 15px;
+            padding: 14px 28px;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            transition: opacity 0.2s, transform 0.2s;
+            margin-right: 12px;
+        }
+
+        .btn-primary:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .btn-ghost {
+            display: inline-block;
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 14px;
+            padding: 13px 24px;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            transition: border-color 0.2s, color 0.2s;
+        }
+
+        .btn-ghost:hover {
+            border-color: rgba(255, 255, 255, 0.15);
+            color: var(--text);
+        }
+
+        p {
+            color: var(--text-muted);
+            font-size: 15px;
+            line-height: 1.7;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="nav-inner">
+            <a href="../index.html" class="nav-logo">⚡ PositioningHQ</a>
+            <a href="../index.html" class="nav-back">← Back to marketplace</a>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <div class="container">
+            <div class="skill-meta">
+                <span class="skill-badge">🔍 Research</span>
+                <span class="skill-badge">Competitive Intel</span>
+            </div>
+            <h1>Company Research<br /><span class="accent">&amp; Positioning</span></h1>
+            <p class="hero-sub">9-step structured research workflow. Give it a company name and website — get back a
+                complete market intelligence document covering product, market, customers, competition, and synthesis.
+            </p>
+            <div class="command-block">
+                <span class="cmd-prefix">$</span>
+                <span>/company-research Stripe | stripe.com</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <section class="section">
+            <h2>Research Steps</h2>
+            <p style="margin-bottom: 24px;">The skill runs 9 sequential steps, reading detailed instructions from <code
+                    style="color: var(--accent2); font-family: monospace;">assets/</code> for each. All enriched with
+                live web search.</p>
+            <div class="steps-list">
+                <div class="step-item">
+                    <div class="step-num">1</div>
+                    <div class="step-content">
+                        <h3>Company Overview</h3>
+                        <p>Founding history, business model, revenue, team size, funding status.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-num">2</div>
+                    <div class="step-content">
+                        <h3>Product / Service Analysis</h3>
+                        <p>Core product lines, pricing model, key features, technical differentiation.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-num">3</div>
+                    <div class="step-content">
+                        <h3>Market Segment</h3>
+                        <p>TAM/SAM, category definition, market positioning, growth trends.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-num">4</div>
+                    <div class="step-content">
+                        <h3>Customer Segment</h3>
+                        <p>ICP, buyer personas, use cases, customer logos, and industry verticals.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-num">5</div>
+                    <div class="step-content">
+                        <h3>Strengths</h3>
+                        <p>Sustainable competitive advantages, moats, brand, partnerships.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-num">6</div>
+                    <div class="step-content">
+                        <h3>Weaknesses</h3>
+                        <p>Known gaps, complaints, pricing concerns, coverage limits.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-num">7</div>
+                    <div class="step-content">
+                        <h3>Recent Developments</h3>
+                        <p>Product launches, funding rounds, leadership changes, press coverage.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-num">8</div>
+                    <div class="step-content">
+                        <h3>Competitive Analysis</h3>
+                        <p>Head-to-head comparison matrix against key competitors.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-num">9</div>
+                    <div class="step-content">
+                        <h3>Final Synthesis</h3>
+                        <p>Executive summary combining all findings into a positioning-ready document.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Output</h2>
+            <div class="output-box">
+                <div class="output-row"><span class="output-label">File format</span><span class="output-val">.md
+                        (Markdown)</span></div>
+                <div class="output-row"><span class="output-label">File name</span><span
+                        class="output-val">/memory/company-research/[Company].md</span></div>
+                <div class="output-row"><span class="output-label">Auto-stored</span><span class="output-val">Yes —
+                        other skills read it automatically</span></div>
+                <div class="output-row"><span class="output-label">Web search</span><span class="output-val">Yes —
+                        enriches all 9 sections</span></div>
+                <div class="output-row"><span class="output-label">Feeds into</span><span
+                        class="output-val">/positioning-playbook, /battlecard</span></div>
+            </div>
+        </section>
+
+        <section class="cta-bar">
+            <a href="https://github.com/your-github-handle/positioninghq/blob/main/company-research/SKILL.md"
+                class="btn-primary" target="_blank">View SKILL.md on GitHub</a>
+            <a href="../index.html#install" class="btn-ghost">Install Plugin</a>
+        </section>
+    </div>
+</body>
+
+</html>

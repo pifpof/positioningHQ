@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Setup Positioning Vault — PositioningHQ</title>
+    <meta name="description"
+        content="Initialise your PositioningHQ vault in one session — folder structure, company info, company research, and positioning playbook all set up automatically." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet" />
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg: #080c14;
+            --surface: #0e1420;
+            --surface2: #131a27;
+            --border: rgba(255, 255, 255, 0.07);
+            --text: #e8edf5;
+            --muted: #7a8499;
+            --accent: #6c63ff;
+            --accent2: #a78bfa;
+            --green: #34d399;
+            --r: 10px;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+        }
+
+        .wrap {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            background: rgba(8, 12, 20, 0.7);
+        }
+
+        .ni {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 24px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .back {
+            font-size: 14px;
+            color: var(--muted);
+            text-decoration: none;
+        }
+
+        .back:hover {
+            color: var(--text);
+        }
+
+        .hero {
+            padding: 130px 0 56px;
+        }
+
+        .badge {
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 100px;
+            display: inline-block;
+            margin: 0 6px 24px 0;
+        }
+
+        .badge-purple {
+            background: rgba(108, 99, 255, 0.12);
+            border: 1px solid rgba(108, 99, 255, 0.25);
+            color: var(--accent2);
+        }
+
+        .badge-green {
+            background: rgba(52, 211, 153, 0.12);
+            border: 1px solid rgba(52, 211, 153, 0.25);
+            color: var(--green);
+        }
+
+        h1 {
+            font-size: clamp(30px, 5vw, 52px);
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            margin-bottom: 20px;
+            line-height: 1.15;
+        }
+
+        .hl {
+            color: var(--accent2);
+        }
+
+        .sub {
+            font-size: 18px;
+            color: var(--muted);
+            margin-bottom: 36px;
+            max-width: 620px;
+            line-height: 1.7;
+        }
+
+        .cmd {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            padding: 14px 20px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 15px;
+            margin-bottom: 48px;
+        }
+
+        .cp {
+            color: var(--accent2);
+        }
+
+        .sec {
+            padding: 48px 0;
+            border-top: 1px solid var(--border);
+        }
+
+        h2 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 14px;
+            color: var(--muted);
+            line-height: 1.65;
+        }
+
+        /* Steps */
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .step {
+            display: flex;
+            gap: 20px;
+            padding: 20px 0;
+            position: relative;
+        }
+
+        .step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 16px;
+            top: 52px;
+            bottom: 0;
+            width: 2px;
+            background: var(--border);
+        }
+
+        .snum {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            color: #fff;
+            font-size: 14px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            z-index: 1;
+        }
+
+        .sc h3 {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 6px;
+        }
+
+        .sc p {
+            font-size: 13px;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        .sc code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: var(--accent2);
+            background: rgba(108, 99, 255, 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        /* Vault structure */
+        .vault-tree {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            padding: 20px 24px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            line-height: 2;
+            color: var(--muted);
+            overflow-x: auto;
+        }
+
+        .vault-tree .dir {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .vault-tree .label {
+            color: var(--muted);
+            font-size: 11px;
+            font-family: 'Inter', sans-serif;
+            margin-left: 8px;
+        }
+
+        /* What gets created */
+        .creates-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 4px;
+        }
+
+        .creates-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            padding: 16px 18px;
+        }
+
+        .creates-path {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: var(--accent2);
+            margin-bottom: 6px;
+        }
+
+        .creates-card h3 {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .creates-card p {
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        /* Config example */
+        .config-box {
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            padding: 20px 24px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            line-height: 1.8;
+            color: var(--muted);
+        }
+
+        .config-box .key {
+            color: var(--accent2);
+        }
+
+        .config-box .val {
+            color: var(--text);
+        }
+
+        .config-box .check {
+            color: var(--green);
+        }
+
+        .config-box .uncheck {
+            color: var(--muted);
+        }
+
+        .config-box .h {
+            color: var(--text);
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        /* Notice */
+        .notice {
+            background: rgba(108, 99, 255, 0.08);
+            border: 1px solid rgba(108, 99, 255, 0.2);
+            border-radius: var(--r);
+            padding: 16px 20px;
+            margin-top: 20px;
+            font-size: 13px;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        .notice strong {
+            color: var(--text);
+        }
+
+        .cta {
+            padding: 48px 0 80px;
+            text-align: center;
+        }
+
+        .bp {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            color: #fff;
+            font-weight: 700;
+            font-size: 15px;
+            padding: 13px 26px;
+            border-radius: var(--r);
+            text-decoration: none;
+            margin-right: 12px;
+        }
+
+        .bg {
+            display: inline-block;
+            border: 1px solid var(--border);
+            color: var(--muted);
+            font-size: 14px;
+            padding: 12px 22px;
+            border-radius: var(--r);
+            text-decoration: none;
+        }
+
+        @media (max-width: 600px) {
+            .creates-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="ni"><a href="../index.html" class="logo">⚡ PositioningHQ</a><a href="../index.html" class="back">←
+                Back</a></div>
+    </nav>
+
+    <div class="hero">
+        <div class="wrap">
+            <span class="badge badge-green">⭐ Start Here</span>
+            <span class="badge badge-purple">Setup</span>
+            <span class="badge badge-purple">Onboarding</span>
+            <h1>Setup Positioning<br /><span class="hl">Vault</span></h1>
+            <p class="sub">The onboarding skill. In a single guided session, it creates your vault folder structure,
+                collects company details, and automatically runs <code
+                    style="font-family: monospace; color: var(--accent2);">/company-research</code> and <code
+                    style="font-family: monospace; color: var(--accent2);">/positioning-playbook</code> — so every other
+                skill has context from day one.</p>
+            <div class="cmd"><span class="cp">$</span><span>/setup-positioning-vault</span></div>
+        </div>
+    </div>
+
+    <div class="wrap">
+
+        <div class="sec">
+            <h2>7-Step Guided Workflow</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="snum">1</div>
+                    <div class="sc">
+                        <h3>Choose your vault root</h3>
+                        <p>Provide any absolute or relative path — e.g. <code>/Users/yourname/vaults/acme</code> or
+                            <code>./acme-vault</code>. Defaults to <code>./positioning-vault</code> if not specified.
+                            This is the only required input before setup begins.
+                        </p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="snum">2</div>
+                    <div class="sc">
+                        <h3>Create folder structure</h3>
+                        <p>Creates all required folders inside your vault root. See the vault layout below. Skips any
+                            folders that already exist.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="snum">3</div>
+                    <div class="sc">
+                        <h3>Write vault.config.md</h3>
+                        <p>Creates a lightweight tracker file at the vault root. Records company info, creation date,
+                            and a checkbox for each skill that has been run. Auto-updates as skills complete.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="snum">4</div>
+                    <div class="sc">
+                        <h3>Collect company information</h3>
+                        <p>Asks for 5 required fields: company name, website, industry, one-line product description,
+                            and 2–3 main competitors. All five are required before research begins.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="snum">5</div>
+                    <div class="sc">
+                        <h3>Run /company-research</h3>
+                        <p>Executes the full 9-step company research workflow automatically. Stores output in
+                            <code>memory/company-research/[CompanyName].md</code>. Summarises key findings and asks if
+                            you want to provide additional materials.
+                        </p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="snum">6</div>
+                    <div class="sc">
+                        <h3>Run /positioning-playbook</h3>
+                        <p>Generates the full 7-section positioning playbook using the research output. Stores in
+                            <code>memory/positioning-playbook/[CompanyName].md</code>.
+                        </p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="snum">7</div>
+                    <div class="sc">
+                        <h3>Vault ready confirmation</h3>
+                        <p>Prints a summary of what was created and what skills you can run next — all of which will
+                            auto-load context from your vault.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="sec">
+            <h2>Vault Folder Layout</h2>
+            <p style="margin-bottom: 20px;">The skill creates this structure inside whatever path you specify as the
+                vault root.</p>
+            <div class="vault-tree">
+                <span class="dir">VAULT_ROOT/</span><br />
+                ├── <span class="dir">memory/</span><br />
+                │ ├── <span class="dir">company-research/</span><span class="label">← output of
+                    /company-research</span><br />
+                │ └── <span class="dir">positioning-playbook/</span><span class="label">← output of
+                    /positioning-playbook</span><br />
+                ├── <span class="dir">inputs/</span><span class="label">← drop reference materials here
+                    anytime</span><br />
+                │ ├── <span class="dir">sales collateral/</span><br />
+                │ ├── <span class="dir">competitive-intel/</span><br />
+                │ ├── <span class="dir">roadmap/</span><br />
+                │ ├── <span class="dir">help-docs/</span><br />
+                │ ├── <span class="dir">customer references/</span><br />
+                │ └── <span class="dir">company strategy/</span><br />
+                ├── <span class="dir">outputs/</span><br />
+                │ ├── <span class="dir">battlecards/</span><span class="label">← output of /battlecard</span><br />
+                │ ├── <span class="dir">call-plans/</span><span class="label">← output of /call-plan</span><br />
+                │ └── <span class="dir">launch/</span><span class="label">← output of /product-launch</span><br />
+                └── vault.config.md<span class="label">← status tracker, updated automatically</span>
+            </div>
+        </div>
+
+        <div class="sec">
+            <h2>vault.config.md — Status File</h2>
+            <p style="margin-bottom: 20px;">Created automatically and updated each time a skill completes. Check it
+                anytime to see your vault status.</p>
+            <div class="config-box">
+                <span class="h"># PositioningHQ Vault</span><br /><br />
+                <span class="key">**Created:**</span> <span class="val">2026-03-12</span><br />
+                <span class="key">**Vault Root:**</span> <span
+                    class="val">/Users/yourname/vaults/acme</span><br /><br />
+                <span class="h">## Company</span><br />
+                - <span class="key">**Name:**</span> <span class="val">Acme Corp</span><br />
+                - <span class="key">**Website:**</span> <span class="val">acmecorp.com</span><br />
+                - <span class="key">**Industry:**</span> <span class="val">B2B SaaS, revenue
+                    intelligence</span><br /><br />
+                <span class="h">## Status</span><br />
+                - <span class="check">[x]</span> Company Research<br />
+                - <span class="check">[x]</span> Positioning Playbook<br />
+                - <span class="uncheck">[ ]</span> Battlecards<br />
+                - <span class="uncheck">[ ]</span> Call Plans
+            </div>
+            <div class="notice">
+                <strong>Reinitialise detection:</strong> If a vault already exists at the path you provide (detected via
+                <code style="font-family: monospace;">vault.config.md</code>), the skill will ask whether to
+                reinitialise or update — it won't silently overwrite your existing memory files.
+            </div>
+        </div>
+
+        <div class="sec">
+            <h2>What Gets Populated</h2>
+            <div class="creates-grid">
+                <div class="creates-card">
+                    <div class="creates-path">memory/company-research/</div>
+                    <h3>Company Research</h3>
+                    <p>Full 9-step market intelligence doc. Auto-loaded by /positioning-playbook and /battlecard.</p>
+                </div>
+                <div class="creates-card">
+                    <div class="creates-path">memory/positioning-playbook/</div>
+                    <h3>Positioning Playbook</h3>
+                    <p>7-section sales-ready playbook. Auto-loaded by /battlecard, /call-plan, and /product-launch.</p>
+                </div>
+                <div class="creates-card">
+                    <div class="creates-path">inputs/</div>
+                    <h3>Inputs (your materials)</h3>
+                    <p>6 subfolders for sales collateral, competitive intel, roadmap, help docs, customer references,
+                        and company strategy. Drop files here anytime.</p>
+                </div>
+                <div class="creates-card">
+                    <div class="creates-path">vault.config.md</div>
+                    <h3>Status Tracker</h3>
+                    <p>Lightweight config file updated automatically as each skill runs.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta">
+            <a href="https://github.com/your-github-handle/positioninghq/blob/main/skills/setup-positioning-vault/SKILL.md"
+                class="bp" target="_blank">View SKILL.md on GitHub</a>
+            <a href="../index.html#install" class="bg">Install Plugin</a>
+        </div>
+    </div>
+</body>
+
+</html>

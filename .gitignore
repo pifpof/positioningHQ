@@ -1,0 +1,16 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Claude Code local memory (user-generated, not tracked)
+/memory/
+**/memory/
+
+# Temp files
+*.tmp
+*.log
+~$*
+
+# Node (if any tooling is added later)
+node_modules/

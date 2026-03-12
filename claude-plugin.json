@@ -1,0 +1,95 @@
+{
+  "name": "positioninghq",
+  "version": "1.1.0",
+  "description": "A complete GTM and positioning intelligence suite for founders, PMMs, and sales leaders. Includes 6 skills: vault setup, company research, positioning playbooks, competitive battlecards, sales call prep, and product launch planning.",
+  "author": "PositioningHQ",
+  "homepage": "https://positioninghq.com",
+  "repository": "https://github.com/your-github-handle/positioninghq",
+  "license": "MIT",
+  "keywords": [
+    "positioning",
+    "go-to-market",
+    "sales-enablement",
+    "competitive-intelligence",
+    "product-marketing",
+    "battlecards",
+    "gtm"
+  ],
+  "skills": [
+    {
+      "name": "setup-positioning-vault",
+      "path": "skills/setup-positioning-vault/SKILL.md",
+      "description": "Initialises a PositioningHQ vault for a company. Creates the required folder structure, collects company details, and runs company-research and positioning-playbook to populate memory with foundational context. Run this first.",
+      "command": "/setup-positioning-vault",
+      "version": "1.0.0",
+      "tags": [
+        "setup",
+        "vault",
+        "onboarding"
+      ]
+    },
+    {
+      "name": "company-research",
+      "path": "skills/company-research/SKILL.md",
+      "description": "Perform comprehensive company research and produce a structured positioning document covering market, product, customers, strengths, weaknesses, and competitive landscape.",
+      "command": "/company-research",
+      "version": "1.0.0",
+      "tags": [
+        "research",
+        "competitive-intelligence",
+        "positioning"
+      ]
+    },
+    {
+      "name": "positioning-playbook",
+      "path": "skills/positioning-playbook/SKILL.md",
+      "description": "Generate a complete, sales-ready Positioning Playbook covering ICP, value drivers, distinct advantages, positioning statement, competitive intelligence, and customer proof points.",
+      "command": "/positioning-playbook",
+      "version": "1.0.0",
+      "tags": [
+        "positioning",
+        "gtm",
+        "B2B",
+        "playbook"
+      ]
+    },
+    {
+      "name": "competitive-battlecards",
+      "path": "skills/battlecard/SKILL.md",
+      "description": "Generate one markdown battlecard per competitor, designed for sales new hire enablement. Enriches internal materials with web search to cover positioning, objections, landmine questions, and proof points.",
+      "command": "/battlecard",
+      "version": "1.0.0",
+      "tags": [
+        "sales-enablement",
+        "competitive",
+        "battlecard"
+      ]
+    },
+    {
+      "name": "call-plan",
+      "path": "skills/call-prep/SKILL.md",
+      "description": "Generate a fully personalized sales call plan as a Word doc (.docx), tailored to the prospect, call stage (discovery / demo / follow-up / closing), and your product's positioning.",
+      "command": "/call-plan",
+      "version": "1.0.0",
+      "tags": [
+        "sales",
+        "call-prep",
+        "docx",
+        "discovery"
+      ]
+    },
+    {
+      "name": "product-launch",
+      "path": "skills/product-launch/SKILL.md",
+      "description": "Generate a complete product launch plan through a structured founder interview: messaging narrative, GTM channel plan, sales enablement brief, internal FAQ, launch announcement, success metrics, and a positioning impact assessment.",
+      "command": "/product-launch",
+      "version": "1.0.0",
+      "tags": [
+        "launch",
+        "gtm",
+        "product-marketing",
+        "messaging"
+      ]
+    }
+  ]
+}

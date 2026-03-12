@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Competitive Battlecards — PositioningHQ</title>
+    <meta name="description"
+        content="Generate one markdown battlecard per competitor for sales new hire enablement. Auto-loads your positioning playbook from memory." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet" />
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg: #080c14;
+            --surface: #0e1420;
+            --border: rgba(255, 255, 255, 0.07);
+            --text: #e8edf5;
+            --text-muted: #7a8499;
+            --accent: #34d399;
+            --accent2: #6ee7b7;
+            --radius: 16px;
+            --radius-sm: 10px;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            background: rgba(8, 12, 20, 0.7);
+        }
+
+        .nav-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 24px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .nav-logo {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .nav-back {
+            font-size: 14px;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .nav-back:hover {
+            color: var(--text);
+        }
+
+        .hero {
+            padding: 130px 0 64px;
+        }
+
+        .skill-badge {
+            background: rgba(52, 211, 153, 0.12);
+            border: 1px solid rgba(52, 211, 153, 0.25);
+            color: var(--accent2);
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 100px;
+            display: inline-block;
+            margin-right: 8px;
+            margin-bottom: 24px;
+        }
+
+        h1 {
+            font-size: clamp(32px, 5vw, 52px);
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            margin-bottom: 20px;
+            line-height: 1.15;
+        }
+
+        .accent {
+            color: var(--accent);
+        }
+
+        .hero-sub {
+            font-size: 18px;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-bottom: 36px;
+            line-height: 1.7;
+        }
+
+        .command-block {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 14px 20px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 15px;
+            margin-bottom: 48px;
+        }
+
+        .cmd-prefix {
+            color: var(--accent2);
+        }
+
+        .section {
+            padding: 48px 0;
+            border-top: 1px solid var(--border);
+        }
+
+        h2 {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 20px;
+        }
+
+        .steps-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 16px 20px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+        }
+
+        .step-num {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: rgba(52, 211, 153, 0.15);
+            color: var(--accent2);
+            font-size: 13px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .step-content h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .step-content p {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.55;
+        }
+
+        .card-sections {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .card-section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 14px 16px;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .card-section strong {
+            display: block;
+            color: var(--text);
+            font-size: 13px;
+            margin-bottom: 4px;
+        }
+
+        .output-box {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 24px;
+        }
+
+        .output-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 14px;
+        }
+
+        .output-row:last-child {
+            border-bottom: none;
+        }
+
+        .output-label {
+            color: var(--text-muted);
+        }
+
+        .output-val {
+            color: var(--text);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+        }
+
+        .cta-bar {
+            padding: 48px 0 80px;
+            text-align: center;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent), #059669);
+            color: #000;
+            font-weight: 700;
+            font-size: 15px;
+            padding: 14px 28px;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            transition: opacity 0.2s;
+            margin-right: 12px;
+        }
+
+        .btn-primary:hover {
+            opacity: 0.85;
+        }
+
+        .btn-ghost {
+            display: inline-block;
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 14px;
+            padding: 13px 24px;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            transition: border-color 0.2s, color 0.2s;
+        }
+
+        .btn-ghost:hover {
+            border-color: rgba(255, 255, 255, 0.15);
+            color: var(--text);
+        }
+
+        p {
+            color: var(--text-muted);
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        @media (max-width: 600px) {
+            .card-sections {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="nav-inner">
+            <a href="../index.html" class="nav-logo">⚡ PositioningHQ</a>
+            <a href="../index.html" class="nav-back">← Back to marketplace</a>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <div class="container">
+            <span class="skill-badge">⚔️ Sales Enablement</span>
+            <span class="skill-badge">Competitive</span>
+            <h1>Competitive<br /><span class="accent">Battlecards</span></h1>
+            <p class="hero-sub">One markdown battlecard per competitor — built for sales new hire enablement. Auto-loads
+                your positioning playbook and knowledge base from memory, then enriches with live web research.</p>
+            <div class="command-block">
+                <span class="cmd-prefix">$</span>
+                <span>/battlecard</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <section class="section">
+            <h2>Workflow</h2>
+            <div class="steps-list">
+                <div class="step-item">
+                    <div class="step-num">1</div>
+                    <div class="step-content">
+                        <h3>Identify Competitors</h3>
+                        <p>Extract from your inputs or ask: "Which competitors should I build battlecards for?"</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-num">2</div>
+                    <div class="step-content">
+                        <h3>Load Internal Knowledge</h3>
+                        <p>Auto-reads your positioning playbook from <code
+                                style="color: var(--accent2); font-family: monospace;">/memory/positioning-playbook/</code>
+                            and all files from <code
+                                style="color: var(--accent2); font-family: monospace;">/memory/knowledgebase/</code>.
+                        </p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-num">3</div>
+                    <div class="step-content">
+                        <h3>Research Each Competitor</h3>
+                        <p>Web searches: positioning, head-to-head comparisons, pricing, customer logos, and recent news
+                            — filling gaps not covered by your internal materials.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-num">4</div>
+                    <div class="step-content">
+                        <h3>Generate One Card Per Competitor</h3>
+                        <p>Uses the battlecard template to produce a consistent, scannable markdown file per competitor.
+                        </p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-num">5</div>
+                    <div class="step-content">
+                        <h3>Confidence Summary</h3>
+                        <p>After all cards are generated, outputs a confidence rating (High / Medium / Low) for each and
+                            lists any remaining gaps.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>What's In Each Battlecard</h2>
+            <div class="card-sections">
+                <div class="card-section"><strong>Their Pitch</strong>How they describe themselves and what they lead
+                    with.</div>
+                <div class="card-section"><strong>Strengths</strong>What they genuinely do well — be honest.</div>
+                <div class="card-section"><strong>Weaknesses</strong>Known gaps, complaints, pricing friction points.
+                </div>
+                <div class="card-section"><strong>Landmine Questions</strong>Discovery questions that expose their
+                    weakness naturally.</div>
+                <div class="card-section"><strong>Our Differentiators</strong>Specific reasons to choose your product
+                    over theirs.</div>
+                <div class="card-section"><strong>Proof Points</strong>Customer wins, outcomes, and case study
+                    references.</div>
+                <div class="card-section"><strong>Objection Handling</strong>When a prospect says "but [competitor] has
+                    X..."</div>
+                <div class="card-section"><strong>When We Win / Lose</strong>Deal signal patterns from real win/loss
+                    data.</div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Output</h2>
+            <div class="output-box">
+                <div class="output-row"><span class="output-label">File format</span><span class="output-val">One .md
+                        per competitor</span></div>
+                <div class="output-row"><span class="output-label">File name</span><span
+                        class="output-val">battlecard-[competitor-name].md</span></div>
+                <div class="output-row"><span class="output-label">Reads from memory</span><span class="output-val">Yes
+                        — /memory/positioning-playbook/ and /memory/knowledgebase/</span></div>
+                <div class="output-row"><span class="output-label">Web search</span><span class="output-val">Yes — fills
+                        gaps not covered by internal materials</span></div>
+            </div>
+        </section>
+
+        <section class="cta-bar">
+            <a href="https://github.com/your-github-handle/positioninghq/blob/main/battlecard/SKILL.md"
+                class="btn-primary" target="_blank">View SKILL.md on GitHub</a>
+            <a href="../index.html#install" class="btn-ghost">Install Plugin</a>
+        </section>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sales Call Prep — PositioningHQ</title>
+    <meta name="description"
+        content="Personalized stage-specific sales call plans as .docx files tied to your positioning." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet" />
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg: #080c14;
+            --surface: #0e1420;
+            --border: rgba(255, 255, 255, 0.07);
+            --text: #e8edf5;
+            --muted: #7a8499;
+            --accent: #fb923c;
+            --accent2: #fdba74;
+            --r: 10px;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+        }
+
+        .wrap {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            background: rgba(8, 12, 20, 0.7);
+        }
+
+        .ni {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 24px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .back {
+            font-size: 14px;
+            color: var(--muted);
+            text-decoration: none;
+        }
+
+        .back:hover {
+            color: var(--text);
+        }
+
+        .hero {
+            padding: 130px 0 64px;
+        }
+
+        .badge {
+            background: rgba(251, 146, 60, 0.12);
+            border: 1px solid rgba(251, 146, 60, 0.25);
+            color: var(--accent2);
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 100px;
+            display: inline-block;
+            margin: 0 6px 24px 0;
+        }
+
+        h1 {
+            font-size: clamp(32px, 5vw, 52px);
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            margin-bottom: 20px;
+            line-height: 1.15;
+        }
+
+        .hl {
+            color: var(--accent);
+        }
+
+        .sub {
+            font-size: 18px;
+            color: var(--muted);
+            margin-bottom: 36px;
+            max-width: 600px;
+            line-height: 1.7;
+        }
+
+        .cmd {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            padding: 14px 20px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 15px;
+            margin-bottom: 48px;
+        }
+
+        .cp {
+            color: var(--accent2);
+        }
+
+        .sec {
+            padding: 48px 0;
+            border-top: 1px solid var(--border);
+        }
+
+        h2 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .grid2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            padding: 18px 20px;
+        }
+
+        .stag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--accent2);
+            background: rgba(251, 146, 60, 0.1);
+            padding: 3px 8px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .card h3 {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 6px;
+        }
+
+        .card p,
+        p {
+            font-size: 13px;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 14px 18px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+        }
+
+        .snum {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: rgba(251, 146, 60, 0.15);
+            color: var(--accent2);
+            font-size: 12px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .sc h3 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .outbox {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 22px;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 14px;
+        }
+
+        .row:last-child {
+            border-bottom: none;
+        }
+
+        .rl {
+            color: var(--muted);
+        }
+
+        .rv {
+            color: var(--text);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+        }
+
+        .cta {
+            padding: 48px 0 80px;
+            text-align: center;
+        }
+
+        .bp {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent), #ea580c);
+            color: #fff;
+            font-weight: 700;
+            font-size: 15px;
+            padding: 13px 26px;
+            border-radius: var(--r);
+            text-decoration: none;
+            margin-right: 12px;
+        }
+
+        .bg {
+            display: inline-block;
+            border: 1px solid var(--border);
+            color: var(--muted);
+            font-size: 14px;
+            padding: 12px 22px;
+            border-radius: var(--r);
+            text-decoration: none;
+        }
+
+        @media (max-width: 600px) {
+            .grid2 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="ni"><a href="../index.html" class="logo">⚡ PositioningHQ</a><a href="../index.html" class="back">←
+                Back</a></div>
+    </nav>
+    <div class="hero">
+        <div class="wrap">
+            <span class="badge">📞 Sales</span><span class="badge">Call Prep</span>
+            <h1>Sales Call <span class="hl">Prep</span></h1>
+            <p class="sub">Personalized, stage-specific call plans output as .docx. Always researches the prospect
+                company first. Every question tied to your positioning playbook.</p>
+            <div class="cmd"><span class="cp">$</span><span>/call-plan</span></div>
+        </div>
+    </div>
+
+    <div class="wrap">
+        <div class="sec">
+            <h2>Four Call Stages</h2>
+            <div class="grid2">
+                <div class="card"><span class="stag">discovery</span>
+                    <h3>Discovery</h3>
+                    <p>First call. Hypothesis-driven questions tied to known pains from your positioning.</p>
+                </div>
+                <div class="card"><span class="stag">demo</span>
+                    <h3>Demo</h3>
+                    <p>Use-case focused walkthrough tied to what was uncovered in discovery.</p>
+                </div>
+                <div class="card"><span class="stag">follow-up</span>
+                    <h3>Follow-Up</h3>
+                    <p>Multi-stakeholder progression, new objections, expanding the champion.</p>
+                </div>
+                <div class="card"><span class="stag">closing</span>
+                    <h3>Closing</h3>
+                    <p>Commercial negotiation, final objections, and concrete next-step ask.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="sec">
+            <h2>Workflow</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="snum">1</div>
+                    <div class="sc">
+                        <h3>Collect Inputs</h3>
+                        <p>Positioning playbook, prospect name/role, company, and call stage. Optional: tech stack,
+                            prior notes.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="snum">2</div>
+                    <div class="sc">
+                        <h3>Research Prospect Company</h3>
+                        <p>Always web-searches: overview, recent news, leadership, tech stack — to personalise the
+                            opening hypothesis.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="snum">3</div>
+                    <div class="sc">
+                        <h3>Load Call Structure</h3>
+                        <p>Reads <code
+                                style="color: var(--accent2); font-family: monospace;">references/call-structures.md</code>
+                            for the precise structure for the chosen stage.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="snum">4</div>
+                    <div class="sc">
+                        <h3>Generate .docx</h3>
+                        <p>Complete call plan with no placeholder text. Research gaps flagged explicitly. Output is
+                            Word-ready.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="sec">
+            <h2>Output</h2>
+            <div class="outbox">
+                <div class="row"><span class="rl">File format</span><span class="rv">.docx (Word document)</span></div>
+                <div class="row"><span class="rl">File name</span><span
+                        class="rv">call-plan-[prospect]-[stage]-[date].docx</span></div>
+                <div class="row"><span class="rl">Chat summary</span><span class="rv">2–3 sentence brief + research
+                        gaps</span></div>
+                <div class="row"><span class="rl">Web search</span><span class="rv">Yes — live prospect research always
+                        runs</span></div>
+            </div>
+        </div>
+
+        <div class="cta">
+            <a href="https://github.com/your-github-handle/positioninghq/blob/main/call-prep/SKILL.md" class="bp"
+                target="_blank">View SKILL.md on GitHub</a>
+            <a href="../index.html#install" class="bg">Install Plugin</a>
+        </div>
+    </div>
+</body>
+
+</html>
