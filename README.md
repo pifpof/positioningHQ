@@ -1,6 +1,6 @@
 # PositioningHQ — Claude Code Plugin
 
-[![Version](https://img.shields.io/badge/version-1.1.0-blue.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-beta-blue.svg)](CHANGELOG.md)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Skills](https://img.shields.io/badge/skills-6-purple.svg)](claude-plugin.json)
 
@@ -12,7 +12,7 @@ Built for founders, PMMs, and sales leaders who want research, positioning, batt
 ## Install
 
 ```bash
-/install-plugin github.com/your-github-handle/positioninghq
+/install-plugin github.com/pifpof/positioningHQ
 ```
 
 Once installed, all 6 slash commands are available in your Claude Code session.
