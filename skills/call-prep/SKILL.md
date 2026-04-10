@@ -1,11 +1,11 @@
 ---
 name: call-plan
-description: Generates a personalized, stage-specific sales call plan as a Word doc (.docx). Use this skill whenever a rep asks to prepare for a sales call, create a call plan, prep for a discovery or demo meeting, or needs a pre-call brief for a specific prospect. Takes the positioning playbook plus prospect details as input — always researches the prospect company via web search before generating. Covers all sales cycle stages: discovery, demo, follow-up, and closing calls.
+description: Generates a personalized, stage-specific sales call plan as a Markdown file (.md). Use this skill whenever a rep asks to prepare for a sales call, create a call plan, prep for a discovery or demo meeting, or needs a pre-call brief for a specific prospect. Takes the positioning playbook plus prospect details as input — always researches the prospect company via web search before generating. Covers all sales cycle stages: discovery, demo, follow-up, and closing calls.
 ---
 
 # Call Plan Skill
 
-Generates a fully personalized call plan as a Word document (.docx), tailored to the prospect, the call stage, and the product's positioning. Follows the Command of the Message framework with best-practice sales structure.
+Generates a fully personalized call plan as a Markdown file (.md), tailored to the prospect, the call stage, and the product's positioning. Follows the Command of the Message framework with best-practice sales structure.
 
 ---
 
@@ -59,15 +59,15 @@ Using the positioning playbook, prospect research, and the appropriate call stru
 
 Fill every section with specifics — no generic placeholders. If a section cannot be confidently personalised, mark it `⚠️ Research gap — confirm before call`.
 
-Then output the call plan as a Word doc (.docx) using the docx skill.
-Read `references/docx-output.md` for exact formatting and generation instructions.
+Then output the call plan as a Markdown file (.md).
+Read `references/md-output.md` for exact formatting and output instructions.
 
 ---
 
 ## Step 5 — Deliver
 
 Output:
-- One `.docx` file named `call-plan-[prospect-company]-[stage]-[date].docx`
+- One `.md` file named `call-plan-[prospect-company]-[stage]-[date].md`, saved to `output/call-plan/`
 - A 2–3 sentence summary in the chat: prospect name, call stage, top hypothesis, and any research gaps flagged
 
 ---
