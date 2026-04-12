@@ -4,13 +4,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PositioningHQ — Claude Code Plugin</title>
+  <title>PositioningHQ — Claude Desktop Plugin</title>
   <meta name="description"
-    content="A complete GTM and positioning intelligence suite for Claude Code. 5 skills: company research, positioning playbooks, competitive battlecards, call prep, and product launch planning." />
+    content="A complete GTM and positioning intelligence suite for Claude Desktop. 6 skills: vault setup, company research, positioning playbooks, competitive battlecards, call prep, and product launch planning." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=JetBrains+Mono:wght@400;500&display=swap"
     rel="stylesheet" />
   <style>
     *,
@@ -22,20 +22,20 @@
     }
 
     :root {
-      --bg: #080c14;
-      --surface: #0e1420;
-      --surface2: #131a27;
-      --border: rgba(255, 255, 255, 0.07);
-      --border-hover: rgba(255, 255, 255, 0.15);
-      --text: #e8edf5;
-      --text-muted: #7a8499;
-      --text-dim: #4a5568;
-      --accent: #6c63ff;
-      --accent2: #a78bfa;
-      --accent3: #38bdf8;
-      --green: #34d399;
-      --orange: #fb923c;
-      --pink: #f472b6;
+      --bg: #111016;
+      --surface: #1C1B22;
+      --surface2: #3A3A3A;
+      --border: rgba(226, 218, 208, 0.15);
+      --border-hover: rgba(226, 218, 208, 0.30);
+      --text: #FAF8F4;
+      --text-muted: #E2DAD0;
+      --text-dim: #7A7A7A;
+      --accent: #B8935A;
+      --accent2: #D4AA72;
+      --accent3: #B8935A;
+      --green: #D4AA72;
+      --orange: #B8935A;
+      --pink: #D4AA72;
       --radius: 16px;
       --radius-sm: 10px;
     }
@@ -44,11 +44,15 @@
       scroll-behavior: smooth;
     }
 
+    h1, h2, h3, .nav-logo {
+      font-family: 'Playfair Display', serif;
+    }
+
     body {
       background: var(--bg);
       color: var(--text);
       font-family: 'Inter', sans-serif;
-      line-height: 1.6;
+      line-height: 1.7;
       overflow-x: hidden;
     }
 
@@ -183,8 +187,8 @@
     }
 
     .nav-cta {
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      color: #fff;
+      background: var(--accent);
+      color: #0E0E0E;
       text-decoration: none;
       padding: 8px 18px;
       border-radius: 8px;
@@ -209,8 +213,8 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: rgba(108, 99, 255, 0.12);
-      border: 1px solid rgba(108, 99, 255, 0.3);
+      background: rgba(184, 147, 90, 0.12);
+      border: 1px solid rgba(184, 147, 90, 0.3);
       border-radius: 100px;
       padding: 6px 16px 6px 10px;
       font-size: 13px;
@@ -251,7 +255,7 @@
     }
 
     .gradient-text {
-      background: linear-gradient(135deg, #6c63ff 0%, #a78bfa 40%, #38bdf8 100%);
+      background: linear-gradient(135deg, #B8935A 0%, #D4AA72 40%, #FAF8F4 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -431,7 +435,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, var(--card-accent, #6c63ff) 0%, transparent 60%);
+      background: linear-gradient(135deg, var(--card-accent, #B8935A) 0%, transparent 60%);
       opacity: 0;
       transition: opacity 0.3s;
     }
@@ -482,8 +486,8 @@
       font-family: 'JetBrains Mono', monospace;
       font-size: 13px;
       color: var(--accent2);
-      background: rgba(108, 99, 255, 0.1);
-      border: 1px solid rgba(108, 99, 255, 0.2);
+      background: rgba(184, 147, 90, 0.1);
+      border: 1px solid rgba(184, 147, 90, 0.2);
       display: inline-block;
       padding: 4px 10px;
       border-radius: 6px;
@@ -534,68 +538,68 @@
 
     /* Card accent colors */
     .card-purple {
-      --card-accent: #6c63ff;
+      --card-accent: #B8935A;
     }
 
     .card-purple .skill-icon {
-      background: rgba(108, 99, 255, 0.15);
+      background: rgba(184, 147, 90, 0.15);
     }
 
     .card-blue {
-      --card-accent: #38bdf8;
+      --card-accent: #D4AA72;
     }
 
     .card-blue .skill-icon {
-      background: rgba(56, 189, 248, 0.15);
+      background: rgba(212, 170, 114, 0.15);
     }
 
     .card-green {
-      --card-accent: #34d399;
+      --card-accent: #B8935A;
     }
 
     .card-green .skill-icon {
-      background: rgba(52, 211, 153, 0.15);
+      background: rgba(184, 147, 90, 0.15);
     }
 
     .card-orange {
-      --card-accent: #fb923c;
+      --card-accent: #D4AA72;
     }
 
     .card-orange .skill-icon {
-      background: rgba(251, 146, 60, 0.15);
+      background: rgba(212, 170, 114, 0.15);
     }
 
     .card-pink {
-      --card-accent: #f472b6;
+      --card-accent: #B8935A;
     }
 
     .card-pink .skill-icon {
-      background: rgba(244, 114, 182, 0.15);
+      background: rgba(184, 147, 90, 0.15);
     }
 
     .tag-purple {
-      background: rgba(108, 99, 255, 0.15);
-      color: #a78bfa;
+      background: rgba(184, 147, 90, 0.15);
+      color: #D4AA72;
     }
 
     .tag-blue {
-      background: rgba(56, 189, 248, 0.12);
-      color: #38bdf8;
+      background: rgba(212, 170, 114, 0.12);
+      color: #D4AA72;
     }
 
     .tag-green {
-      background: rgba(52, 211, 153, 0.12);
-      color: #34d399;
+      background: rgba(184, 147, 90, 0.12);
+      color: #B8935A;
     }
 
     .tag-orange {
-      background: rgba(251, 146, 60, 0.12);
-      color: #fb923c;
+      background: rgba(212, 170, 114, 0.12);
+      color: #D4AA72;
     }
 
     .tag-pink {
-      background: rgba(244, 114, 182, 0.12);
-      color: #f472b6;
+      background: rgba(184, 147, 90, 0.12);
+      color: #B8935A;
     }
 
     /* ── Workflow section ── */
@@ -769,7 +773,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse at 50% -20%, rgba(108, 99, 255, 0.15) 0%, transparent 70%);
+      background: radial-gradient(ellipse at 50% -20%, rgba(184, 147, 90, 0.15) 0%, transparent 70%);
       pointer-events: none;
     }
 
@@ -943,8 +947,8 @@
         <a href="#skills">Skills</a>
         <a href="#workflow">Workflow</a>
         <a href="#how">How it works</a>
-        <a href="https://github.com/your-github-handle/positioninghq" target="_blank" rel="noopener">GitHub</a>
-        <a href="https://github.com/your-github-handle/positioninghq" target="_blank" rel="noopener"
+        <a href="https://github.com/pifpof/positioningHQ" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://github.com/pifpof/positioningHQ" target="_blank" rel="noopener"
           class="nav-cta">Install Plugin →</a>
       </div>
     </div>
@@ -955,29 +959,28 @@
     <div class="container">
       <div class="hero-badge fade-up">
         <span class="hero-badge-dot"></span>
-        Claude Code Plugin · v1.1.0 · 6 Skills
+        Claude Desktop Plugin · v1.1.0 · 6 Skills
       </div>
 
       <h1 class="fade-up">
-        Your GTM command centre,<br />
-        <span class="gradient-text">inside Claude Code.</span>
+        Build your company's complete<br />
+        <span class="gradient-text">Positioning Playbook.</span>
       </h1>
 
       <p class="hero-sub fade-up">
-        Research companies, craft positioning playbooks, build competitive battlecards, prep for any sales call, and
-        plan product launches — all from a single plugin.
+        Use AI as your strategic partner. In a half-day working session, build competitive battlecards, and a call prep tool — all live, all working, all yours to keep.
       </p>
 
       <div class="fade-up">
         <div class="install-box" id="installBox" onclick="copyInstall()">
           <span class="install-box-prefix">$</span>
-          <span>/install-plugin github.com/your-github-handle/positioninghq</span>
+          <span>/install-plugin github.com/pifpof/positioningHQ</span>
           <button class="install-box-copy" title="Copy">⎘ Copy</button>
           <div class="copied-tooltip" id="copiedTip">Copied!</div>
         </div>
       </div>
       <p class="hero-meta fade-up">
-        <a href="https://github.com/your-github-handle/positioninghq" target="_blank" rel="noopener">View on GitHub</a>
+        <a href="https://github.com/pifpof/positioningHQ" target="_blank" rel="noopener">View on GitHub</a>
         &nbsp;·&nbsp; MIT License &nbsp;·&nbsp; No build step required
       </p>
 
@@ -1020,7 +1023,7 @@
           <div class="skill-card-header">
             <div class="skill-icon">⭐</div>
             <div class="skill-card-tags">
-              <span class="tag" style="background: rgba(167,139,250,0.15); color: #a78bfa;">Start Here</span>
+              <span class="tag" style="background: rgba(167,139,250,0.15); color: #D4AA72;">Start Here</span>
               <span class="tag tag-purple">Setup</span>
               <span class="tag tag-blue">Onboarding</span>
             </div>
@@ -1195,7 +1198,7 @@
       <div class="fade-up">
         <p class="section-tag">How it works</p>
         <h2 class="section-title">Install once. Run anywhere.</h2>
-        <p class="section-sub">PositioningHQ is a standard Claude Code plugin — no APIs, no accounts, no configuration.
+        <p class="section-sub">PositioningHQ is a standard Claude Desktop plugin — no APIs, no accounts, no configuration.
         </p>
       </div>
 
@@ -1205,8 +1208,8 @@
           <div class="how-content">
             <h3>Install the plugin</h3>
             <p>Run <code
-                style="color: var(--accent2); font-family: monospace;">/install-plugin github.com/your-github-handle/positioninghq</code>
-              in any Claude Code session. Done.</p>
+                style="color: var(--accent2); font-family: monospace;">/install-plugin github.com/pifpof/positioningHQ</code>
+              in any Claude Desktop session. Done.</p>
           </div>
         </div>
         <div class="how-item">
@@ -1245,8 +1248,8 @@
         <div class="prereq-grid">
           <div class="prereq-card">
             <div class="prereq-icon">⚡</div>
-            <div class="prereq-title">Claude Code</div>
-            <div class="prereq-desc">Any tier. The plugin system is built into Claude Code — no additional setup
+            <div class="prereq-title">Claude Desktop</div>
+            <div class="prereq-desc">Any tier. The plugin system is built into Claude Desktop — no additional setup
               required.</div>
           </div>
           <div class="prereq-card">
@@ -1272,18 +1275,18 @@
     <div class="container">
       <div class="cta-inner fade-up">
         <h2 class="cta-title">Ready to build your GTM engine?</h2>
-        <p class="cta-sub">Install PositioningHQ in your Claude Code session and run your first skill in under a minute.
+        <p class="cta-sub">Install PositioningHQ in your Claude Desktop session and run your first skill in under a minute.
         </p>
         <div class="cta-install" onclick="copyInstall()">
           <span class="cta-install-prefix">$</span>
-          <span style="color: var(--text);">/install-plugin github.com/your-github-handle/positioninghq</span>
+          <span style="color: var(--text);">/install-plugin github.com/pifpof/positioningHQ</span>
         </div>
         <div class="cta-buttons">
-          <a href="https://github.com/your-github-handle/positioninghq" target="_blank" rel="noopener"
+          <a href="https://github.com/pifpof/positioningHQ" target="_blank" rel="noopener"
             class="btn-outline">
             ★ Star on GitHub
           </a>
-          <a href="https://github.com/your-github-handle/positioninghq/issues/new/choose" target="_blank" rel="noopener"
+          <a href="https://github.com/pifpof/positioningHQ/issues/new/choose" target="_blank" rel="noopener"
             class="btn-outline">
             Suggest a Skill
           </a>
@@ -1300,10 +1303,10 @@
           Built by <a href="https://positioninghq.com" target="_blank" rel="noopener">PositioningHQ</a> · MIT License
         </div>
         <div class="footer-right">
-          <a href="https://github.com/your-github-handle/positioninghq" target="_blank" rel="noopener">GitHub</a>
-          <a href="https://github.com/your-github-handle/positioninghq/blob/main/CHANGELOG.md" target="_blank"
+          <a href="https://github.com/pifpof/positioningHQ" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://github.com/pifpof/positioningHQ/blob/main/CHANGELOG.md" target="_blank"
             rel="noopener">Changelog</a>
-          <a href="https://github.com/your-github-handle/positioninghq/blob/main/CONTRIBUTING.md" target="_blank"
+          <a href="https://github.com/pifpof/positioningHQ/blob/main/CONTRIBUTING.md" target="_blank"
             rel="noopener">Contribute</a>
           <a href="https://positioninghq.com" target="_blank" rel="noopener">Website</a>
         </div>
@@ -1314,7 +1317,7 @@
   <script>
     // Copy install command
     function copyInstall() {
-      const text = '/install-plugin github.com/your-github-handle/positioninghq';
+      const text = '/install-plugin github.com/pifpof/positioningHQ';
       navigator.clipboard.writeText(text).catch(() => {});
       const tip = document.getElementById('copiedTip');
       if (tip) {

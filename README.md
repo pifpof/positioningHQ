@@ -36,15 +36,15 @@ If you'd rather have an expert facilitate the session for your team, that's what
 
 The Positioning Playbook is built on seven elements, structured around a single insight: your solution only makes sense inside your customer's context. Most frameworks start with the product. This one ends there.
 
-| # | Element | What it defines |
-|---|---|---|
-| 01 | Market Overview — The "Why Now?" | The market shifts and windows of opportunity that make your solution necessary right now |
-| 02 | Target Customers & ICP | The demographic and characteristics of your right-fit customers — who you win with, reliably |
-| 03 | Value Drivers | The three outcomes your ideal customers find genuinely valuable — what they'll shift budget to achieve |
-| 04 | Distinct Advantages (Moat) | How you do it differently and better than anyone else for your target customers |
-| 05 | Competitive Intelligence | Deep, up-to-date knowledge of your competitors — how they position, where they're weak, how to win |
-| 06 | Positioning Your Solution | How your solution is a leader at delivering something a well-defined set of customers cares a lot about |
-| 07 | Proof Points | The evidence behind your claims — case studies, testimonials, analyst reports, win stories |
+| #   | Element                          | What it defines                                                                                         |
+| --- | -------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| 01  | Market Overview — The "Why Now?" | The market shifts and windows of opportunity that make your solution necessary right now                |
+| 02  | Target Customers & ICP           | The demographic and characteristics of your right-fit customers — who you win with, reliably            |
+| 03  | Value Drivers                    | The three outcomes your ideal customers find genuinely valuable — what they'll shift budget to achieve  |
+| 04  | Distinct Advantages (Moat)       | How you do it differently and better than anyone else for your target customers                         |
+| 05  | Competitive Intelligence         | Deep, up-to-date knowledge of your competitors — how they position, where they're weak, how to win      |
+| 06  | Positioning Your Solution        | How your solution is a leader at delivering something a well-defined set of customers cares a lot about |
+| 07  | Proof Points                     | The evidence behind your claims — case studies, testimonials, analyst reports, win stories              |
 
 *Framework informed by the work of April Dunford.*
 
